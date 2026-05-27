@@ -1,10 +1,5 @@
 package golongpoll
 
-import (
-	"container/heap"
-	"fmt"
-)
-
 // This priority queue manages eventBuffers that expire after a certain
 // period of inactivity (no new events).
 type expiringBuffer struct {
@@ -37,48 +32,30 @@ type expiringBuffer struct {
 // A priorityQueue implements heap.Interface and holds Items.
 type priorityQueue []*expiringBuffer
 
-func (pq priorityQueue) Len() int { return len(pq) }
+func (pq priorityQueue) Len() int { _ = "STUB: not implemented"; return 0 }
 
 func (pq priorityQueue) Less(i, j int) bool {
+	_ = "STUB: not implemented"
 	// We want Pop to give us the lowest priority, so less uses < here:
-	return pq[i].priority < pq[j].priority
+	return false
 }
 
-func (pq priorityQueue) Swap(i, j int) {
-	pq[i], pq[j] = pq[j], pq[i]
-	pq[i].index = i
-	pq[j].index = j
-}
+func (pq priorityQueue) Swap(i, j int) { _ = "STUB: not implemented"; return }
 
-func (pq *priorityQueue) Push(x interface{}) {
-	n := len(*pq)
-	item := x.(*expiringBuffer)
-	item.index = n
-	*pq = append(*pq, item)
-}
+func (pq *priorityQueue) Push(x interface{}) { _ = "STUB: not implemented"; return }
 
-func (pq *priorityQueue) Pop() interface{} {
-	old := *pq
-	n := len(old)
-	item := old[n-1]
-	item.index = -1 // for safety
-	*pq = old[0 : n-1]
-	return item
-}
+func (pq *priorityQueue) Pop() interface{} { _ = "STUB: not implemented"; return nil }
+
+// for safety
 
 // update modifies the priority of an item and updates the heap accordingly
 func (pq *priorityQueue) updatePriority(item *expiringBuffer, priority int64) {
-	item.priority = priority
+	_ = "STUB: not implemented"
+	return
+
 	// NOTE: fix is a slightly more efficient version of calling Remove() and
 	// then Push()
-	heap.Fix(pq, item.index)
 }
 
 // get the priority of the heap's top item.
-func (pq *priorityQueue) peekTopPriority() (int64, error) {
-	if len(*pq) > 0 {
-		return (*pq)[0].priority, nil
-	}
-
-	return -1, fmt.Errorf("PriorityQueue is empty.  No top priority.")
-}
+func (pq *priorityQueue) peekTopPriority() (int64, error) { _ = "STUB: not implemented"; return 0, nil }

@@ -51,28 +51,28 @@ type AddOn interface {
 // For example, if you wanted an addon that simply logged when an event
 // is published, you could do:
 //
-// type LoggerAddOn struct {
-//   TrivialAddOn
-// }
+//	type LoggerAddOn struct {
+//	  TrivialAddOn
+//	}
 //
-// func (lad *LoggerAddOn) OnPublish(event *Event) {
-//   log.Printf("Event was published: %v\n", event)
-// }
+//	func (lad *LoggerAddOn) OnPublish(event *Event) {
+//	  log.Printf("Event was published: %v\n", event)
+//	}
 type TrivialAddOn struct{}
 
 // OnPublish does nothing
 func (tad *TrivialAddOn) OnPublish(event *Event) {
+	_ = "STUB: not implemented"
+
+	// OnShutdown does nothing
 	return
 }
 
-// OnShutdown does nothing
 func (tad *TrivialAddOn) OnShutdown() {
+	_ = "STUB: not implemented"
+
+	// OnLongpollStart returns an empty, closed events channel.
 	return
 }
 
-// OnLongpollStart returns an empty, closed events channel.
-func (tad *TrivialAddOn) OnLongpollStart() <-chan *Event {
-	trivial := make(chan *Event)
-	close(trivial)
-	return trivial
-}
+func (tad *TrivialAddOn) OnLongpollStart() <-chan *Event { _ = "STUB: not implemented"; return nil }
